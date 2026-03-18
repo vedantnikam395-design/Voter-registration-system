@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Form</title>
+</head>
+<style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        /* Header */
+        .header {
+            background-color: #0b3d91;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Main container */
+        .container {
+            width: 420px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 25px 30px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0b3d91;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: #0b3d91;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #082c6c;
+        }
+
+        .secondary-btn {
+            background-color: #2e7d32;
+        }
+
+        .secondary-btn:hover {
+            background-color: #1b5e20;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 13px;
+            color: gray;
+        }
+
+        .message {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .last-data {
+            background-color: #eef3ff;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+
+<body >
+    <div class="container">
+        <h2>New Voter Details Entry</h2>
+
+        <form action="/submit" method="post">
+            <label>Full Name</label>
+            <input type="text" name="name" placeholder="Enter full name" required>
+
+            <label>Age</label>
+            <input type="number" name="age" placeholder="Enter age" required>
+
+            <label>Gender</label>
+            <select name="gender" required>
+                <option value="">-- Select Gender --</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Prefer not to say</option>
+            </select>
+
+            <button class="btn" type="submit">Submit Details</button>
+        </form>
+
+        <button class="btn secondary-btn" onclick="lastget()">View Last Submitted Record</button>
+
+        
+    <script>
+        function lastget(){
+            let pass = prompt("Enter the password : ");
+            if (pass=="1212"){
+                window.location.href = "/last"
+            }else{
+                alert("Worng Passcode !!")
+            }
+        }
+    </script>
+
+    {% if message %}
+    <script>
+        alert("{{message}}");
+    </script>
+    {% endif %}
+
+This will display Last data ............
+
+    {% if last_row %}
+    <h3>Last Submitted Data</h3>
+    <table border="1">
+        <tr>
+            <td><b>Name</b></td>
+            <td>{{ last_row[0] }}</td>
+        </tr>
+        <tr>
+            <td><b>Age</b></td>
+            <td>{{ last_row[1] }}</td>
+        </tr>
+        <tr>
+            <td><b>Gender</b></td>
+            <td>{{ last_row[2] }}</td>
+        </tr>
+        <tr>
+            <td><b>Age Group</b></td>
+            <td>{{ last_row[3] }}</td>
+        </tr>
+    </table>
+    {% endif %}
+
+</body>
+</html>
